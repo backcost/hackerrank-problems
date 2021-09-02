@@ -10,12 +10,23 @@ The cost to convert a black gift into white gift or vice versa is z units.
 Determine the minimum cost of Diksha's gifts. */
 
 const taumBday = (b, w, bc, wc, z) => {
-    var allBlack = (b * bc + w * (bc + z))
-    var allWhite = w * wc + b * (wc + z)
-    var blackAndWhite = b * bc + w *wc
+    const BigB = BigInt(b)
+    const BigW = BigInt(w)
+    const BigBc = BigInt(bc)
+    const BigWc = BigInt(wc)
+    const BigZ = BigInt(z)
 
-    var minimumCost = Math.min(allBlack, allWhite, blackAndWhite)
+    var allBlack = BigB * BigBc + BigW * (BigBc + BigZ)
+    var allWhite = BigW * BigWc + BigB * (BigWc + BigZ)
+    var blackAndWhite = BigB * BigBc + BigW * BigWc
 
+    let minimumCost = allBlack
+
+    for (let el of [allWhite, blackAndWhite]) {
+        if (el < minimumCost) {
+            minimumCost = el
+        }
+    }
     return minimumCost
 }
 
