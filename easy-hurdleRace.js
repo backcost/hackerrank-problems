@@ -10,7 +10,7 @@
 const hurdleRace = (k, height) => {
     let max = Number(height[0])
 
-    for(element of height) {
+    for(let element of height) {
         if (Number(element) > max) {
             max = Number(element)
         }
