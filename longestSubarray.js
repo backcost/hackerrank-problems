@@ -1,4 +1,5 @@
-/* Finding longest subarray with absolute difference less than or equal to 1 */
+/* Finding longest subarray with absolute difference less than or 
+equal to 1 */
 
 function longestSubarray(arr) {
     var longest = 0
