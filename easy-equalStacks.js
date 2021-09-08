@@ -11,7 +11,9 @@ const equalStacks = (h1, h2, h3) => {
     let h1Height = 0
     let h2Height = 0
     let h3Height = 0
-        
+    
+    //reduce
+    
     for (let el of h1) {
         h1Height += el
     }
