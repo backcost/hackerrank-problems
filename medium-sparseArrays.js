@@ -3,20 +3,23 @@ strings. For each query string, determine how many times it occurs in
 the list of input strings. Return an array of the results. */
 
 const matchingStrings = (strings, queries) => {
-    var totalArray = []
+    let totalArray = []
 
-    for (let query of queries) {
-        var total = 0
+    for (let query of queries) { //n 
+        let total = 0 //1
 
-        for (let el of strings) {
+        for (let el of strings) { // n * (1 + 1)
             if (query === el) {
                 total++
             }
         }
-        totalArray.push(total)
+        totalArray.push(total) //1
     }
     return totalArray
 }
+// n * (2 + 2n)
+// 2n * 2n²
+// O(n²)
 
 console.log(matchingStrings(['ab','ab','abc'], ['ab','abc','bc'])) // [2,1,0]
 console.log(matchingStrings(['aba','baba','aba','xzxb'], ['aba','xzxb','ab'])) // [2,1,0]
