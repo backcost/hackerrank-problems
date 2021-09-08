@@ -29,7 +29,7 @@ const queensAttack = (n, k, r_q, c_q, obstacles = []) => {
     let southeast = Math.min(east, south)
     let southwest = Math.min(west, south)
 
-    // now with obstacles
+    // with obstacles
     for(let el of obstacles) {
         var r_o = el[0]
         var c_o = el[1]
