@@ -13,7 +13,7 @@ const matchingStrings = (strings, queries) => {
                 total++
             }
         }
-        totalArray.push(total) //1
+        ttotalArray.push(total) //1
     }
     return totalArray
 }
