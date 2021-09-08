@@ -31,8 +31,8 @@ const queensAttack = (n, k, r_q, c_q, obstacles = []) => {
 
     // with obstacles
     for(let el of obstacles) {
-        var r_o = el[0]
-        var c_o = el[1]
+        let r_o = el[0]
+        let c_o = el[1]
 
         if (r_o === r_q) {
 
