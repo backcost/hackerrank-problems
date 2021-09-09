@@ -8,15 +8,15 @@ more cylinders from the top of zero or more of the three stacks until
 they are all the same height, then return the height. */
 
 const equalStacks = (h1, h2, h3) => {
-    const reducer = (a, b) => a + b //1
+    const reducer = (a, b) => a + b // 1
     
     let h1Height = h1.reduce(reducer) // n
     let h2Height = h2.reduce(reducer) // n
     let h3Height = h3.reduce(reducer) // n
     
-    var minimum = Math.min(h1Height, h2Height, h3Height) //4
+    let minimum = Math.min(h1Height, h2Height, h3Height) // 4
 
-    while (h1Height !== h2Height || h1Height !== h3Height) { // n * (2 + 2n + 2n + 1 + 3)
+    while (h1Height !== h2Height || h1Height !== h3Height) { // log(n) * (2 + 2n + 2n + 1 + 3)
         while (h1Height > minimum) {
             h1Height -= h1.shift()
         }
@@ -30,10 +30,40 @@ const equalStacks = (h1, h2, h3) => {
     }
     return minimum
 }
-// 1 + 3n + 4 + n * (2 + 2n + 2n + 1 + 3)
-// 5 + 3n + 2n + 2n² + 2n² + 4n
-// 4n² + 9n + 5
-// O(n²)
+// 1 + 3n + 4 + log(n) * (2 + 2n + 2n + 1 + 3)
+// 4n*log(n) + 6log(n) + 3n + 5 
+// O(n log n)
 
 console.log(equalStacks([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]))
 //5
+
+
+// ANOTHER WAY
+const equalStacks = (h1, h2, h3) => {
+    const reducer = (a, b) => a + b // 1
+    
+    const has_to_remove = (sum, arr, min) => { // 1
+        if (sum !== min) {
+            sum = sum - arr.shift()
+        }
+        return sum
+    }
+
+    let h1Height = h1.reduce(reducer) // n
+    let h2Height = h2.reduce(reducer) // n
+    let h3Height = h3.reduce(reducer) // n
+    
+    while (true) { // n * (4 + 2 + 2 + 2 + 1)
+        let minimum = Math.min(h1Height, h2Height, h3Height)
+        if (h1Height === h2Height && h1Height === h3Height) {
+            return minimum
+        }
+        h1Height = has_to_remove(h1Height, h1, minimum)
+        h2Height = has_to_remove(h2Height, h2, minimum)
+        h3Height = has_to_remove(h3Height, h3, minimum)
+    }
+}
+
+// 1 + 1 + 3n + 11n
+// 14n + 2
+// O(n)
