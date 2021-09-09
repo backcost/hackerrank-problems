@@ -8,24 +8,15 @@ more cylinders from the top of zero or more of the three stacks until
 they are all the same height, then return the height. */
 
 const equalStacks = (h1, h2, h3) => {
-    let h1Height = 0
-    let h2Height = 0
-    let h3Height = 0
+    const reducer = (a, b) => a + b //1
     
-    //reduce
+    let h1Height = h1.reduce(reducer) // n
+    let h2Height = h2.reduce(reducer) // n
+    let h3Height = h3.reduce(reducer) // n
     
-    for (let el of h1) {
-        h1Height += el
-    }
-    for (let el of h2) {
-        h2Height += el
-    }
-    for (let el of h3) {
-        h3Height += el
-    }
-    var minimum = Math.min(h1Height, h2Height, h3Height)
+    var minimum = Math.min(h1Height, h2Height, h3Height) //4
 
-    while (h1Height !== h2Height || h1Height !== h3Height) {
+    while (h1Height !== h2Height || h1Height !== h3Height) { // n * (2 + 2n + 2n + 1 + 3)
         while (h1Height > minimum) {
             h1Height -= h1.shift()
         }
@@ -39,6 +30,10 @@ const equalStacks = (h1, h2, h3) => {
     }
     return minimum
 }
+// 1 + 3n + 4 + n * (2 + 2n + 2n + 1 + 3)
+// 5 + 3n + 2n + 2n² + 2n² + 4n
+// 4n² + 9n + 5
+// O(n²)
 
 console.log(equalStacks([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]))
 //5
