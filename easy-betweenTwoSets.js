@@ -15,8 +15,10 @@ const getTotalX = (a, b) => {
     b.sort(compare)
 
     let between = 0
+    const aLast = a[a.length-1]
+    const bLast = b[b.length-1]
 
-    for (let actual = a[a.length-1]; actual <= b[b.length-1]; actual++) {
+    for (let actual = aLast; actual <= bLast; actual += aLast) {
         let isFactor = true
         for (let el of a) {
             if (actual % el !== 0) {
@@ -36,9 +38,9 @@ const getTotalX = (a, b) => {
             }
         }
     }
-
     return between
 }
 
 console.log(getTotalX([2, 6],[24, 36])) //2
 console.log(getTotalX([2, 4],[16, 32, 96])) //3
+console.log(getTotalX([1],[100])) //9
