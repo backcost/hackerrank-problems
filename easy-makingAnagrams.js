@@ -15,27 +15,45 @@ determine the minimum number of character deletions required to make a
 and b anagrams. Any characters can be deleted from either of the strings. */
 
 const makeAnagram = (a, b) => {
-    let aArray = a[0].split('')
-    let bArray = b[0].split('')
+    a = a.split('')
+    b = b.split('')
 
-    let smallestArray = bArray
-    let largestArray = aArray
+    let remove = 0
 
-    if (aArray.length < bArray.length) {
-        smallestArray = aArray
-        largestArray = bArray
-    }
+    for (let indexA = 0; indexA < a.length; indexA++) {
+        let equalArrA = a.filter((equal) => equal === a[indexA])
+        let equalArrB = b.filter((equal) => equal === a[indexA])
 
-    let counter = 0
+        let difference = equalArrA.length - equalArrB.length
 
-    for (let el of smallestArray) {
-        if (largestArray.includes(el)) {
-            counter++
+        if (difference > 0) {
+            a.splice(indexA, 1)
+            indexA--
+            remove++
+        } else if (difference < 0) {
+            b.splice(b.indexOf(a[indexA]), 1)
+            remove++
         }
     }
+    for (let indexB = 0; indexB < b.length; indexB++) {
+        let equalArrA = a.filter((equal) => equal === b[indexB])
+        let equalArrB = b.filter((equal) => equal === b[indexB])
 
-    return (largestArray.length - counter) * 2
+        let difference = equalArrA.length - equalArrB.length
+
+        if (difference > 0) {
+            a.splice(a.indexOf(b[indexB]), 1)
+            remove++
+        } else if (difference < 0) {
+            b.splice(indexB, 1)
+            indexB--
+            remove++
+        }
+    }
+    return remove
 }
 
-console.log(makeAnagram(['cde'], ['dcf'])) // 2
-console.log(makeAnagram(['cde'], ['abc'])) // 4
+console.log(makeAnagram('cde', 'dcf')) // 2
+console.log(makeAnagram('cde', 'abc')) // 4
+console.log(makeAnagram('cde', 'abcef')) // 4
+console.log(makeAnagram('fcrxzwscanmligyxyvym', 'jxwtrhvujlmrpdoqbisbwhmgpmeoke')) // 30
