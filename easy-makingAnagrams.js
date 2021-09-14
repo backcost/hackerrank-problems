@@ -33,24 +33,16 @@ const makeAnagram = (a, b) => {
         } else if (difference < 0) {
             b.splice(b.indexOf(a[indexA]), 1)
             remove++
+        } else {
+            b.splice(b.indexOf(a[indexA]), 1)
+            a.splice(indexA, 1)
+            indexA--
         }
     }
-    for (let indexB = 0; indexB < b.length; indexB++) {
-        let equalArrA = a.filter((equal) => equal === b[indexB])
-        let equalArrB = b.filter((equal) => equal === b[indexB])
 
-        let difference = equalArrA.length - equalArrB.length
+    remove += (b.length - a.length)
 
-        if (difference > 0) {
-            a.splice(a.indexOf(b[indexB]), 1)
-            remove++
-        } else if (difference < 0) {
-            b.splice(indexB, 1)
-            indexB--
-            remove++
-        }
-    }
-    return remove
+    return remove 
 }
 
 console.log(makeAnagram('cde', 'dcf')) // 2
