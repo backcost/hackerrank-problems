@@ -21,26 +21,17 @@ const makeAnagram = (a, b) => {
     let remove = 0
 
     for (let indexA = 0; indexA < a.length; indexA++) {
-        let equalArrA = a.filter((equal) => equal === a[indexA])
-        let equalArrB = b.filter((equal) => equal === a[indexA])
+        let bIncludes = b.indexOf(a[indexA])
 
-        let difference = equalArrA.length - equalArrB.length
-
-        if (difference > 0) {
-            a.splice(indexA, 1)
-            indexA--
-            remove++
-        } else if (difference < 0) {
-            b.splice(b.indexOf(a[indexA]), 1)
+        if (bIncludes === -1) {
             remove++
         } else {
-            b.splice(b.indexOf(a[indexA]), 1)
-            a.splice(indexA, 1)
-            indexA--
+            b.splice(bIncludes, 1)
         }
-    }
-
-    remove += (b.length - a.length)
+        a.shift()
+        indexA--
+    }  
+    remove += b.length
 
     return remove 
 }
