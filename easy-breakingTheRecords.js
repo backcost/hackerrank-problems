@@ -23,21 +23,25 @@ the season. */
 function breakingRecords(scores) {
     let mostPoints = scores[0]
     let leastPoints = scores[0]
-    let mostChanges = 0
-    let leastChanges = 0
+    let mostPointsRecordBreaks = 0
+    let leastPointsRecordBreaks = 0
     scores.shift()
 
     for (let el of scores) {
         if (el > mostPoints) {
             mostPoints = el
-            mostChanges++
-        }   else if (el < leastPoints) {
+            mostPointsRecordBreaks++
+        } else if (el < leastPoints) {
             leastPoints = el
-            leastChanges++
+            leastPointsRecordBreaks++
         }
     }
-    return [mostChanges, leastChanges]
+    return [mostPointsRecordBreaks, leastPointsRecordBreaks]
 }
+// Big-O Notation
+// O(n)
+// the for loop depends on the array size
+
 
 console.log(breakingRecords([12, 24, 10, 24])) // [1, 1]
 console.log(breakingRecords([10, 5, 20, 20, 4, 5, 2, 25, 1])) // [2, 4]
