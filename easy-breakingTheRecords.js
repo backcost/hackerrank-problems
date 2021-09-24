@@ -20,8 +20,23 @@ Given the scores for a season, determine the number of times
 Maria breaks her records for most and least points scored during 
 the season. */
 
-const breakingRecords(scores) {
+function breakingRecords(scores) {
+    let mostPoints = scores[0]
+    let leastPoints = scores[0]
+    let mostChanges = 0
+    let leastChanges = 0
+    scores.shift()
 
+    for (let el of scores) {
+        if (el > mostPoints) {
+            mostPoints = el
+            mostChanges++
+        }   else if (el < leastPoints) {
+            leastPoints = el
+            leastChanges++
+        }
+    }
+    return [mostChanges, leastChanges]
 }
 
 console.log(breakingRecords([12, 24, 10, 24])) // [1, 1]
